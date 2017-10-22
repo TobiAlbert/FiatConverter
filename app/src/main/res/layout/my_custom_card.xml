@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_custom_card"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        >
+
+        <TextView
+            android:id="@+id/card_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="Bitcoin"/>
+
+        <TextView
+            android:id="@+id/card_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:layout_below="@+id/card_title"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="2119921.41"/>
+        
+        <Spinner
+            android:id="@+id/crypto_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_amount"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            />
+        
+        
+        <Button
+            android:id="@+id/convert_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/convert_button"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

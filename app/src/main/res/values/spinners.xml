@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    !-- Fiat Currency Array-->
+    <string-array name="fiat_array">
+        <item>US Dollar</item>
+        <item>European Euro</item>
+        <item>Japanese Yen</item>
+        <item>Pound Sterling</item>
+        <item>Australian Dollar</item>
+        <item>Canadian Dollar</item>
+        <item>Swiss Franc</item>
+        <item>Chinese Yuan</item>
+        <item>Swedish Krona</item>
+        <item>Mexican Peso</item>
+        <item>NZ Dollar</item>k
+        <item>Singapore Dollar</item>
+        <item>Hong Kong Dollar</item>
+        <item>Norwegian Krone</item>
+        <item>South Korean Won</item>
+        <item>Turkish Lira</item>
+        <item>Indian Rupee</item>
+        <item>Russian Ruble</item>
+        <item>Brazilian Real</item>
+        <item>S.A. Rand</item>
+        <item>Nigerian Naira</item>
+    </string-array>
+
+</resources>
