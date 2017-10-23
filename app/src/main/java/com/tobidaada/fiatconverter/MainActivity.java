@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.View;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
+
 
 import com.tobidaada.fiatconverter.adapter.RVAdapter;
 import com.tobidaada.fiatconverter.adapter.RVTouchListener;
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         mCardList = new ArrayList<>();
 
-        adapter = new RVAdapter(mCardList);
+        adapter = new RVAdapter(mCardList, this);
 
         mRecyclerView.setAdapter(adapter);
 
@@ -52,26 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(View view, int position) {
-
-                        Button button = (Button) findViewById(R.id.convert_button);
-
-                        final int adapterPosition = position;
-
-                        /*TextView mTextView = (TextView) findViewById(R.id.card_amount);
-                        Spinner mSpinner = (Spinner) findViewById(R.id.crypto_spinner); */
-
-                        Log.i("MainActivity", "AdapterPosition: " + position);
-
-                       switch (position) {
-
-                            case 1:
-
-                                break;
-
-                            case 2:
-
-                                break;
-                        }
 
                     }
                 }));

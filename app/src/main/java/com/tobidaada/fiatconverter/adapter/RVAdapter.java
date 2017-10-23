@@ -1,20 +1,33 @@
 package com.tobidaada.fiatconverter.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.model.data.Card;
+import com.tobidaada.fiatconverter.model.data.CryptoTable;
+import com.tobidaada.fiatconverter.model.data.FiatCurrency;
+import com.tobidaada.fiatconverter.model.data.FiatCurrencyTable;
+import com.tobidaada.fiatconverter.model.remote.ApiUtils;
+import com.tobidaada.fiatconverter.model.remote.CurrencyService;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by TOBI DAADA on 10/22/2017.
@@ -23,9 +36,16 @@ import java.util.List;
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     private List<Card> mCard;
+    private CurrencyService mCurrencyService = ApiUtils.getCurrencyService();
+    private Context context;
 
-    public RVAdapter(List<Card> mCard) {
+    public RVAdapter(List<Card> mCard, Context context) {
         this.mCard = mCard;
+        this.context = context;
+    }
+
+    public Context getContext() {
+        return this.context;
     }
 
     @Override
@@ -40,9 +60,28 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.cardTitle.setText(mCard.get(position).getTitle());
-        holder.cardAmount.setText(mCard.get(position).getAmount());
+        TextView cardTitle = holder.cardTitle;
+        final TextView cardAmount = holder.cardAmount;
+        Spinner cryptoSpinner = holder.cryptoSpinner;
+
+        cardTitle.setText(mCard.get(position).getTitle());
+        cardAmount.setText(mCard.get(position).getAmount());
+        cryptoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
+
+
 
     @Override
     public int getItemCount() {
