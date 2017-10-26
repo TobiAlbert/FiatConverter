@@ -1,7 +1,10 @@
 package com.tobidaada.fiatconverter.adapter;
 
 import android.content.Context;
+
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,11 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tobidaada.fiatconverter.ConversionActivity;
 import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.model.data.Card;
-import com.tobidaada.fiatconverter.model.data.CryptoTable;
 import com.tobidaada.fiatconverter.model.data.FiatCurrency;
-import com.tobidaada.fiatconverter.model.data.FiatCurrencyTable;
+import com.tobidaada.fiatconverter.model.data.CurrencyTable;
 import com.tobidaada.fiatconverter.model.remote.ApiUtils;
 import com.tobidaada.fiatconverter.model.remote.CurrencyService;
 
@@ -60,16 +63,49 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        TextView cardTitle = holder.cardTitle;
+        final TextView cardTitle = holder.cardTitle;
         final TextView cardAmount = holder.cardAmount;
-        Spinner cryptoSpinner = holder.cryptoSpinner;
+        final Spinner cryptoSpinner = holder.cryptoSpinner;
+        Button convertButton = holder.convertButton;
+        final int cardPosition = position;
 
         cardTitle.setText(mCard.get(position).getTitle());
         cardAmount.setText(mCard.get(position).getAmount());
+
+        convertButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+
+                if (cardAmount.getText().toString().length() < 1) {
+                    handleEmptyValue();
+                } else {
+
+                    Intent intent = new Intent(getContext(), ConversionActivity.class);
+                    intent.putExtra("fiatCurrency", cryptoSpinner.getSelectedItem().toString());
+                    intent.putExtra("conversionValue", cardAmount.getText().toString());
+                    intent.putExtra("cryptoCurrency", cardTitle.getText().toString());
+                    context.startActivity(intent);
+                }
+
+            }
+        });
+
         cryptoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                notifyItemChanged(cardPosition);
+
+                String toSymbolSpinner = parent.getSelectedItem().toString();
+                String toSymbol = CurrencyTable.getTickerSymbol(toSymbolSpinner);
+
+                String fromSymbolSpinner = cardTitle.getText().toString();
+                String fromSymbol = CurrencyTable.getTickerSymbol(fromSymbolSpinner);
+
+                getConversion(fromSymbol, toSymbol, cardPosition);
+
+                cardAmount.setText(mCard.get(cardPosition).getAmount());
 
             }
 
@@ -81,7 +117,56 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     }
 
+    public void handleEmptyValue() {
 
+        AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(getContext());
+
+        mAlertDialog.setMessage(R.string.dialog_message);
+
+        mAlertDialog.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+
+        });
+
+        mAlertDialog.create().show();
+    }
+
+    public void getConversion(String fromSymbol, final String toSymbol, final int position) {
+
+        mCurrencyService.getFiatCurrency(fromSymbol, toSymbol).enqueue(new Callback<FiatCurrency>() {
+
+            @Override
+            public void onResponse(Call<FiatCurrency> call, Response<FiatCurrency> response) {
+                if (response.isSuccessful()) {
+                    String url = call.request().url().toString();
+
+                    double amount = response.body().getCurrency(toSymbol);
+
+                    mCard.get(position).setAmount(String.valueOf(amount));
+                    Log.i("RVAdapter", "Position: " + position);
+
+                    notifyItemChanged(position);
+                    Log.i("RVAdapter", "notifyItemChangedPosition: " + position);
+
+                    Log.i("RVAdapter", "URL: " + url);
+                    Log.i("RVAdapter", "Amount: " + amount);
+                } else {
+                    Log.i("RVAdapter", "Error getting conversion");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FiatCurrency> call, Throwable t) {
+                Toast.makeText(getContext(), "Error connecting to the Internet", Toast.LENGTH_SHORT).show();
+                mCard.get(position).setAmount("");
+                notifyItemChanged(position);
+            }
+        });
+
+    }
 
     @Override
     public int getItemCount() {

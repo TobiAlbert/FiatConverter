@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Card Options -->
+    <string-array name="card_array">
+        <item>Bitcoin</item>
+        <item>Ethereum</item>
+    </string-array>
+
+</resources>

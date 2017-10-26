@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context="com.tobidaada.fiatconverter.ConversionActivity">
+
+    <TextView
+        android:id="@+id/fiat_currency_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        tools:text="USD"
+        />
+
+    <EditText
+        android:id="@+id/fiat_currency_ed"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fiat_currency_tv"
+        android:layout_alignParentRight="true"
+        android:inputType="numberDecimal"
+        android:textSize="24sp"
+        tools:text="4000.00"
+        />
+
+    <TextView
+        android:id="@+id/crypto_currency_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_alignLeft="@+id/fiat_currency_tv"
+        android:layout_below="@+id/fiat_currency_tv"
+        android:textSize="24sp"
+        tools:text="BTC"
+        />
+
+    <TextView
+        android:id="@+id/crypto_currency_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/crypto_currency_tv"
+        android:layout_alignRight="@+id/fiat_currency_ed"
+        android:textSize="24sp"
+        tools:text="1"
+        />
+
+
+    <Button
+        android:id="@+id/conversion_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/crypto_currency_value"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="CONVERT"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        />
+
+
+</RelativeLayout>

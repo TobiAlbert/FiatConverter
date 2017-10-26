@@ -8,14 +8,11 @@ public class Card {
 
     private String title;
     private String amount;
-    private int spinnerResource;
 
-
-    public Card(String title, String amount, int spinnerResource) {
+    public Card(String title, String amount) {
 
         this.title = title;
         this.amount = amount;
-        this.spinnerResource = spinnerResource;
 
     }
 
@@ -27,7 +24,5 @@ public class Card {
         return this.amount;
     }
 
-    public int getSpinnerResource() {
-        return this.spinnerResource;
-    }
+    public void setAmount(String amount) {this.amount = amount;}
 }

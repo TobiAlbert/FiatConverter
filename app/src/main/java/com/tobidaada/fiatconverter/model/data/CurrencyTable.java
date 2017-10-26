@@ -7,13 +7,13 @@ import java.util.Map;
  * Created by TOBI DAADA on 10/22/2017.
  */
 
-public class FiatCurrencyTable {
+public class CurrencyTable {
 
     /*
     Man  has to find a better way around this.
     Method returns a String value based on the Selected value from the Fiat Spinner
      */
-    public static String getFiatCurrencyTickerSymbol(String text) {
+    public static String getTickerSymbol(String text) {
 
         Map<String, String> mMap = new HashMap<>();
         mMap.put("US Dollar", "USD");
@@ -37,6 +37,8 @@ public class FiatCurrencyTable {
         mMap.put("Russian Ruble", "RUB");
         mMap.put("Brazilian Real", "BRL");
         mMap.put("S.A. Rand", "ZAR");
+        mMap.put("Bitcoin", "BTC");
+        mMap.put("Ethereum", "ETH");
 
         return mMap.get(text);
     }
