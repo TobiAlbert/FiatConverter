@@ -15,6 +15,8 @@ public class RVTouchListener implements RecyclerView.OnItemTouchListener{
     public interface ClickListener {
         void onClick(View view, int position);
 
+        void onLongClick(View view, int position);
+
     }
 
     private GestureDetector mGestureDetector;
@@ -29,6 +31,15 @@ public class RVTouchListener implements RecyclerView.OnItemTouchListener{
             @Override
             public boolean onSingleTapUp(MotionEvent motionEvent) {
                 return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent motionEvent) {
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+
+                if (child != null && mClickListener != null) {
+                    mClickListener.onLongClick( child, recyclerView.getChildAdapterPosition(child));
+                }
             }
 
         });
