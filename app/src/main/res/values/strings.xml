@@ -7,6 +7,9 @@
     <!-- Dialog Fragment -->
     <string name="OK">OK</string>
     <string name="dialog_message">Pick a currency to convert to.</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="delete_card">Delete Card?</string>
 
     <!-- Menu Item-->
     <string name="add_card">Add Card</string>
