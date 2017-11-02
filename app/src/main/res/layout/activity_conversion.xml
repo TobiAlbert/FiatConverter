@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:padding="32dp"
-    tools:context="com.tobidaada.fiatconverter.ConversionActivity">
+    tools:context="com.tobidaada.fiatconverter.ui.conversion.ConversionActivity">
 
     <TextView
         android:id="@+id/fiat_currency_tv"
