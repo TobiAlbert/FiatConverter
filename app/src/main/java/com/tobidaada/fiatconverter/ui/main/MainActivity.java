@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
             case R.id.add_card:
                 createNewCard();
-
                 return true;
 
             default:
@@ -154,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void initializeCard() {
         mCardList.add( new Card("Bitcoin", ""));
-        //mCardList.add(new Card("Ethereum", ""));
     }
 
 }
