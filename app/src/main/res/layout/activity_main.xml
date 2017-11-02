@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="4dp"
-    tools:context="com.tobidaada.fiatconverter.MainActivity">
+    tools:context="com.tobidaada.fiatconverter.ui.main.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"

@@ -1,4 +1,4 @@
-package com.tobidaada.fiatconverter;
+package com.tobidaada.fiatconverter.ui.conversion;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.model.data.CurrencyTable;
 
 import java.util.Locale;

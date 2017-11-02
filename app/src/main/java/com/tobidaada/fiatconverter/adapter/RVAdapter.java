@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tobidaada.fiatconverter.ConversionActivity;
+import com.tobidaada.fiatconverter.ui.conversion.ConversionActivity;
 import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.model.data.Card;
 import com.tobidaada.fiatconverter.model.data.FiatCurrency;

@@ -1,4 +1,4 @@
-package com.tobidaada.fiatconverter;
+package com.tobidaada.fiatconverter.ui.main;
 
 import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.adapter.RVAdapter;
 import com.tobidaada.fiatconverter.adapter.RVTouchListener;
 import com.tobidaada.fiatconverter.model.data.Card;
@@ -23,7 +24,7 @@ import com.tobidaada.fiatconverter.model.data.Card;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainMvpContract.View{
 
     List<Card> mCardList;
     RVAdapter adapter;

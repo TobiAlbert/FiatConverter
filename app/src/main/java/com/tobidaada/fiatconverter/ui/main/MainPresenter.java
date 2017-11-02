@@ -4,5 +4,5 @@ package com.tobidaada.fiatconverter.ui.main;
  * Created by TOBI DAADA on 11/2/2017.
  */
 
-public class MainPresenter {
+public class MainPresenter implements MainMvpContract.Presenter {
 }

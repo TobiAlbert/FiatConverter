@@ -5,4 +5,12 @@ package com.tobidaada.fiatconverter.ui.conversion;
  */
 
 public class ConversionMvpContract {
+
+    interface Presenter {
+
+    }
+
+    interface View {
+
+    }
 }
