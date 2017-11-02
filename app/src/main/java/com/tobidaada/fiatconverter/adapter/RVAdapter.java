@@ -95,7 +95,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                notifyItemChanged(cardPosition);
 
                 String toSymbolSpinner = parent.getSelectedItem().toString();
                 String toSymbol = CurrencyTable.getTickerSymbol(toSymbolSpinner);
@@ -143,18 +142,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                 if (response.isSuccessful()) {
                     String url = call.request().url().toString();
 
+                    Log.d("RVAdapter", "Url endpoint: " + url);
                     double amount = response.body().getCurrency(toSymbol);
 
                     mCard.get(position).setAmount(String.valueOf(amount));
-                    Log.i("RVAdapter", "Position: " + position);
 
-                    notifyItemChanged(position);
-                    Log.i("RVAdapter", "notifyItemChangedPosition: " + position);
-
-                    Log.i("RVAdapter", "URL: " + url);
-                    Log.i("RVAdapter", "Amount: " + amount);
                 } else {
-                    Log.i("RVAdapter", "Error getting conversion");
+                    Log.d("RVAdapter", "Error getting conversion");
                 }
             }
 
