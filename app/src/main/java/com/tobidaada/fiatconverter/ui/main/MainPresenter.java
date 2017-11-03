@@ -5,4 +5,12 @@ package com.tobidaada.fiatconverter.ui.main;
  */
 
 public class MainPresenter implements MainMvpContract.Presenter {
+
+    private MainMvpContract.View viewContract;
+
+    public MainPresenter(MainMvpContract.View viewContract) {
+        this.viewContract = viewContract;
+    }
+
+
 }

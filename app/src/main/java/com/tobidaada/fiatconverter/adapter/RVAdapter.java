@@ -154,9 +154,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
             @Override
             public void onFailure(Call<FiatCurrency> call, Throwable t) {
-                Toast.makeText(getContext(), "Error connecting to the Internet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Check Network Connection", Toast.LENGTH_SHORT).show();
                 mCard.get(position).setAmount("");
-                notifyItemChanged(position);
             }
         });
 

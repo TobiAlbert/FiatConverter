@@ -10,7 +10,7 @@ import java.util.Map;
 public class CurrencyTable {
 
     /*
-    Man  has to find a better way around this.
+    Man has to find a better way around this.
     Method returns a String value based on the Selected value from the Fiat Spinner
      */
     public static String getTickerSymbol(String text) {

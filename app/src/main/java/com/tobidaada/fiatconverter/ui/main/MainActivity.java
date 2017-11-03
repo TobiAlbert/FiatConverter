@@ -26,30 +26,27 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainMvpContract.View{
 
-    List<Card> mCardList;
-    RVAdapter adapter;
-    RecyclerView mRecyclerView;
-    CardView mCardView;
+    private List<Card> mCardList;
+    private RVAdapter adapter;
+    private RecyclerView mRecyclerView;
+    private MainMvpContract.Presenter presenterContract;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mCardView = (CardView) findViewById(R.id.my_custom_card);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(llm);
 
         mCardList = new ArrayList<>();
-
         adapter = new RVAdapter(mCardList, this);
 
+        presenterContract = new MainPresenter(this);
+
         mRecyclerView.setAdapter(adapter);
-
-        initializeCard();
-
         mRecyclerView.addOnItemTouchListener(new RVTouchListener(getApplicationContext(), mRecyclerView,
                 new RVTouchListener.ClickListener() {
 
@@ -120,9 +117,9 @@ public class MainActivity extends AppCompatActivity implements MainMvpContract.V
                 .setItems(R.array.card_array, new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int position) {
 
-                        switch(which) {
+                        switch(position) {
                             case 0:
                                 mCardList.add(new Card("Bitcoin", ""));
                                 break;
@@ -151,9 +148,4 @@ public class MainActivity extends AppCompatActivity implements MainMvpContract.V
 
         mAlertDialog.create().show();
     }
-
-    public void initializeCard() {
-        mCardList.add( new Card("Bitcoin", ""));
-    }
-
 }

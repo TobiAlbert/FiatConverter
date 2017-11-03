@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.model.data.CurrencyTable;
 
-import java.util.Locale;
-
 public class ConversionActivity extends AppCompatActivity implements ConversionMvpContract.View {
 
     TextView fiatCurrencyText;
