@@ -105,6 +105,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                 getConversion(fromSymbol, toSymbol, cardPosition);
 
                 cardAmount.setText(mCard.get(cardPosition).getAmount());
+                notifyItemChanged(cardPosition);
 
             }
 
@@ -116,7 +117,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     }
 
-    public void handleEmptyValue() {
+    private void handleEmptyValue() {
 
         AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(getContext());
 
@@ -146,6 +147,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                     double amount = response.body().getCurrency(toSymbol);
 
                     mCard.get(position).setAmount(String.valueOf(amount));
+                    notifyItemChanged(position);
 
                 } else {
                     Log.d("RVAdapter", "Error getting conversion");
