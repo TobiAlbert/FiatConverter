@@ -17,7 +17,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:padding="4dp"
         >
 
         <TextView
@@ -27,8 +27,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
             android:gravity="center"
-            android:textSize="24sp"
-            tools:text="Bitcoin"/>
+            android:textSize="32sp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textAllCaps="true"
+            tools:text="Bitcoin"
+            />
 
         <TextView
             android:id="@+id/card_amount"
@@ -48,6 +51,7 @@
             android:layout_below="@+id/card_amount"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
+            style="@style/Base.Widget.AppCompat.DropDownItem.Spinner"
             />
         
         
