@@ -8,9 +8,12 @@ public class ConversionMvpContract {
 
     interface Presenter {
 
+        void convertCurrency(String currencyConversion, String userInput);
+
     }
 
     interface View {
 
+        void showConversion(String result);
     }
 }

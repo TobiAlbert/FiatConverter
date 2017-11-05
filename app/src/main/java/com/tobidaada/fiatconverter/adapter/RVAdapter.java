@@ -95,7 +95,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                notifyItemChanged(cardPosition);
 
                 String toSymbolSpinner = parent.getSelectedItem().toString();
                 String toSymbol = CurrencyTable.getTickerSymbol(toSymbolSpinner);
@@ -106,6 +105,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                 getConversion(fromSymbol, toSymbol, cardPosition);
 
                 cardAmount.setText(mCard.get(cardPosition).getAmount());
+                notifyItemChanged(cardPosition);
 
             }
 
@@ -117,7 +117,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     }
 
-    public void handleEmptyValue() {
+    private void handleEmptyValue() {
 
         AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(getContext());
 
@@ -143,26 +143,21 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                 if (response.isSuccessful()) {
                     String url = call.request().url().toString();
 
+                    Log.d("RVAdapter", "Url endpoint: " + url);
                     double amount = response.body().getCurrency(toSymbol);
 
                     mCard.get(position).setAmount(String.valueOf(amount));
-                    Log.i("RVAdapter", "Position: " + position);
-
                     notifyItemChanged(position);
-                    Log.i("RVAdapter", "notifyItemChangedPosition: " + position);
 
-                    Log.i("RVAdapter", "URL: " + url);
-                    Log.i("RVAdapter", "Amount: " + amount);
                 } else {
-                    Log.i("RVAdapter", "Error getting conversion");
+                    Log.d("RVAdapter", "Error getting conversion");
                 }
             }
 
             @Override
             public void onFailure(Call<FiatCurrency> call, Throwable t) {
-                Toast.makeText(getContext(), "Error connecting to the Internet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Check Network Connection", Toast.LENGTH_SHORT).show();
                 mCard.get(position).setAmount("");
-                notifyItemChanged(position);
             }
         });
 

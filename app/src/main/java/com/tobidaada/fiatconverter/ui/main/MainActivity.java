@@ -6,14 +6,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 
 import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.adapter.RVAdapter;
@@ -23,32 +21,26 @@ import com.tobidaada.fiatconverter.model.data.Card;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
-    List<Card> mCardList;
-    RVAdapter adapter;
-    RecyclerView mRecyclerView;
-    CardView mCardView;
+    private List<Card> mCardList;
+    private RVAdapter adapter;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mCardView = (CardView) findViewById(R.id.my_custom_card);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(llm);
 
         mCardList = new ArrayList<>();
-
         adapter = new RVAdapter(mCardList, this);
 
         mRecyclerView.setAdapter(adapter);
-
-        initializeCard();
-
         mRecyclerView.addOnItemTouchListener(new RVTouchListener(getApplicationContext(), mRecyclerView,
                 new RVTouchListener.ClickListener() {
 
@@ -119,9 +111,9 @@ public class MainActivity extends AppCompatActivity{
                 .setItems(R.array.card_array, new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int position) {
 
-                        switch(which) {
+                        switch(position) {
                             case 0:
                                 mCardList.add(new Card("Bitcoin", ""));
                                 break;
@@ -150,9 +142,4 @@ public class MainActivity extends AppCompatActivity{
 
         mAlertDialog.create().show();
     }
-
-    public void initializeCard() {
-        mCardList.add( new Card("Bitcoin", ""));
-    }
-
 }

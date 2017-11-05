@@ -14,9 +14,7 @@ import android.widget.TextView;
 import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.model.data.CurrencyTable;
 
-import java.util.Locale;
-
-public class ConversionActivity extends AppCompatActivity {
+public class ConversionActivity extends AppCompatActivity implements ConversionMvpContract.View {
 
     TextView fiatCurrencyText;
     EditText fiatCurrencyEditText;
@@ -24,11 +22,14 @@ public class ConversionActivity extends AppCompatActivity {
     TextView cryptoValue;
     Button conversionButton;
     Intent getIntent;
+    ConversionMvpContract.Presenter contractPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversion);
+
+        contractPresenter = new ConversionPresenter(this);
 
         getIntent = getIntent();
 
@@ -39,15 +40,8 @@ public class ConversionActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String conversionValue = getIntent.getStringExtra("conversionValue");
-
-                double fiatCurrency = Double.parseDouble(fiatCurrencyEditText.getText().toString());
-                double conversionValueToDouble = Double.parseDouble(conversionValue);
-
-                double amount = fiatCurrency / conversionValueToDouble;
-
-                cryptoValue.setText(String.format(Locale.getDefault(), "%,.5f", amount));
-
+                contractPresenter.convertCurrency(getIntent.getStringExtra("conversionValue"),
+                        fiatCurrencyEditText.getText().toString());
             }
         });
     }
@@ -75,5 +69,10 @@ public class ConversionActivity extends AppCompatActivity {
         fiatCurrencyText.setText(CurrencyTable.getTickerSymbol(fiatCurrency));
         cryptoText.setText(CurrencyTable.getTickerSymbol(cryptoCurrency));
 
+    }
+
+    @Override
+    public void showConversion(String result) {
+        cryptoValue.setText(result);
     }
 }
