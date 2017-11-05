@@ -6,15 +6,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.tobidaada.fiatconverter.R;
 import com.tobidaada.fiatconverter.adapter.RVAdapter;
@@ -24,12 +21,11 @@ import com.tobidaada.fiatconverter.model.data.Card;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainMvpContract.View{
+public class MainActivity extends AppCompatActivity {
 
     private List<Card> mCardList;
     private RVAdapter adapter;
     private RecyclerView mRecyclerView;
-    private MainMvpContract.Presenter presenterContract;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements MainMvpContract.V
 
         mCardList = new ArrayList<>();
         adapter = new RVAdapter(mCardList, this);
-
-        presenterContract = new MainPresenter(this);
 
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnItemTouchListener(new RVTouchListener(getApplicationContext(), mRecyclerView,
